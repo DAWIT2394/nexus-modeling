@@ -815,7 +815,7 @@ const RegistrationForm = () => {
             <option value="Dancing">Dancing 💃</option>
             <option value="Singing">Singing 🎤</option>
             <option value="Fitness">Fitness 💪</option>
-            <option value="None">None - Willing to Learn 🌱</option>
+            <option value="None - Willing to Learn">None - Willing to Learn 🌱</option>
           </select>
           
           <select

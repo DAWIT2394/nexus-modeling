@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: '/api', // Uses proxy (package.json: "proxy": "http://localhost:5000")
+  baseURL: process.env.REACT_APP_API_URL || 'http://localhost:5000/api',
   timeout: 30000,
 });
 
@@ -20,11 +20,16 @@ api.interceptors.request.use((config) => {
 
 // Registration endpoint – match your backend route
 export const registerStudent = async (formData) => {
-  return api.post('students/register', formData);
+  return api.post('/register', formData);
 };
 
-export const loginAdmin = async (email, password) => {
-  return api.post('/auth/login', { email, password });
+export const loginAdmin = async (phone, password) => {
+  return api.post('/admin/login', { phone, password });
+};
+
+
+export const getStatistics = async () => {
+  return api.get('/statistics');
 };
 
 export const getCourses = async () => {
@@ -37,6 +42,18 @@ export const getGallery = async () => {
 
 export const getStudents = async () => {
   return api.get('/students');
+};
+
+export const updateStudentStatus = async (id, status) => {
+  return api.put(`/students/${id}/status`, { status });
+};
+
+export const updateStudent = async (id, formData) => {
+  return api.put(`/students/${id}`, formData);
+};
+
+export const deleteStudent = async (id) => {
+  return api.delete(`/students/${id}`);
 };
 
 export default api;

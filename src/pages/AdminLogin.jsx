@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { loginAdmin } from '../services/api';
 
 const AdminLogin = () => {
-  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -16,11 +16,16 @@ const AdminLogin = () => {
     setError('');
 
     try {
-      const data = await loginAdmin(email, password);
-      localStorage.setItem('adminToken', data.token);
-      navigate('/dashboard');
+      const response = await loginAdmin(phone, password);
+      const data = response.data;
+      if (data.success && data.token) {
+        localStorage.setItem('adminToken', data.token);
+        navigate('/dashboard');
+      } else {
+        setError(data.message || 'Invalid phone number or password');
+      }
     } catch (err) {
-      setError(err.response?.data?.message || 'Invalid email or password');
+      setError(err.response?.data?.message || 'Invalid phone number or password');
     } finally {
       setLoading(false);
     }
@@ -231,17 +236,17 @@ const AdminLogin = () => {
 
         <form onSubmit={handleSubmit} style={styles.form}>
           <div style={styles.inputGroup}>
-            <label style={styles.inputLabel}>Email Address</label>
+            <label style={styles.inputLabel}>Phone Number</label>
             <input
-              type="email"
-              placeholder="admin@nexus.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              onFocus={() => handleFocus('email')}
+              type="text"
+              placeholder="+251900000000"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              onFocus={() => handleFocus('phone')}
               onBlur={handleBlur}
               style={{
                 ...styles.input,
-                borderColor: focusedField === 'email' ? '#ec4899' : '#e5e7eb',
+                borderColor: focusedField === 'phone' ? '#ec4899' : '#e5e7eb',
               }}
               required
             />

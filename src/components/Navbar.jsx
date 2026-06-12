@@ -362,53 +362,7 @@ const Navbar = () => {
             Register 📝
           </button>
 
-          {isAdminLoggedIn ? (
-            <>
-              <button 
-                onClick={() => handleNavigation('/dashboard')} 
-                style={styles.dashboardBtn}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = '#ec4899';
-                  e.currentTarget.style.color = 'white';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = 'transparent';
-                  e.currentTarget.style.color = '#ec4899';
-                }}>
-                Dashboard 📊
-              </button>
-              <button 
-                onClick={() => {
-                  handleLogout();
-                  scrollToTop();
-                }} 
-                style={styles.logoutBtn}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = '#ef4444';
-                  e.currentTarget.style.color = 'white';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = 'transparent';
-                  e.currentTarget.style.color = '#ef4444';
-                }}>
-                Logout 🚪
-              </button>
-            </>
-          ) : (
-            <button 
-              onClick={() => handleNavigation('/admin')} 
-              style={styles.adminBtn}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = '#6366f1';
-                e.currentTarget.style.color = 'white';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = 'transparent';
-                e.currentTarget.style.color = '#6366f1';
-              }}>
-              Admin 👤
-            </button>
-          )}
+
         </div>
 
         {/* Mobile Menu Button */}
@@ -499,29 +453,7 @@ const Navbar = () => {
                 Register 📝
               </button>
 
-              {isAdminLoggedIn ? (
-                <>
-                  <button 
-                    onClick={() => handleNavigation('/dashboard')} 
-                    style={styles.mobileDashboardBtn}>
-                    Dashboard 📊
-                  </button>
-                  <button 
-                    onClick={() => {
-                      handleLogout();
-                      setIsOpen(false);
-                    }} 
-                    style={styles.mobileLogoutBtn}>
-                    Logout 🚪
-                  </button>
-                </>
-              ) : (
-                <button 
-                  onClick={() => handleNavigation('/admin')} 
-                  style={styles.mobileAdminBtn}>
-                  Admin 👤
-                </button>
-              )}
+
             </div>
           </div>
         )}
